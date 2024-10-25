@@ -1,16 +1,19 @@
-const canvas =document.getElementById("gameCanvas");
+const canvas =document.getElementById("canvasGame");
 const ctx =canvas.getContext('2d');
 
 // size of one snak segment
 const box =20; 
 let snake = [{x:9 *box, y:10 *box}];//initial snake position
 let direction = 'RIGHT';//initial movement direction
+//random food position
 let food={
     x:Math.floor(Math.random()*19 +1)*box,
     y:Math.floor(Math.random()*19 +1)*box
-}//random food position
+}
 
 let score =0;
+let gameOver = false;
+let game;
 
 function initializeGame() {
     snake = [{x: 9 * box, y: 10 * box}];
@@ -23,13 +26,13 @@ function initializeGame() {
     gameOver = false; // Reset the game 
 
     clearInterval(game);
-    game = setInterval(draw, 300);
+    game = setInterval(create, 350);
 }
 
 //control the snake direction
-document.addEventListener('keydown',changeDirection);
+document.addEventListener('keydown',snakeDirection);
 
-function changeDirection(event){
+function snakeDirection(event){
     if (event.keyCode===37 && direction !== 'RIGHT') {
         direction = 'LEFT';
     }
@@ -47,20 +50,19 @@ function changeDirection(event){
 
 function drawSnake(){
     for(let i=0 ; i<snake.length; i++){
-        ctx.fillStyle =(i===0) ? 'green':'lightgreen';
+        ctx.fillStyle =(i===0) ? 'purple':'plum';
         ctx.fillRect(snake[i].x, snake[i].y, box,box);
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
-        ctx.strokeStyle = 'darkgreen';
+        ctx.strokeStyle = 'purple';
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
     }
 }
 //working for preparing snake food
 function drawFood(){
-    ctx.fillStyle = 'red';
+    ctx.fillStyle = '  rgb(53, 167, 175)';
     ctx.fillRect(food.x, food.y, box,box);
 }
-let gameOver = false; // Add a flag for game over state
-//update game
+
 
 function updateGame(){
     if (gameOver) return; // Skip update if the game is over
@@ -101,7 +103,7 @@ let newHead ={
 
 if(snakeX<0 || snakeY <0 || snakeX>=20 *box ||  snakeY >=20*box || collision(newHead , snake )){
     clearInterval(game);//game over
-    gameOver = true; // Set game over state
+    gameOver = true; // Set game over
 
 }
 
@@ -121,12 +123,12 @@ function collision(head, array){
 
 //Main game loop
 
-function draw(){
+function create(){
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.height);
     drawSnake();
     drawFood();
     updateGame();
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = 'purple';
     ctx.font = ' 1.5rem monospace';
     ctx.fillText(`Score: ${score}`, box, box);
 
@@ -140,7 +142,5 @@ function draw(){
 
 
 
-let game = setInterval(draw, 300); 
 
-// Initialize game on page load
-initializeGame();
+
