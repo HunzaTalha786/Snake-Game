@@ -19,14 +19,18 @@ body{
 h1{
     color:#ffff;
     font-size: 3rem;
-    text-align: center;   
+    text-align: center;
+    margin-top: 0;   
 }
    
 
 canvas {
+    width: 100%; /* Make canvas responsive */
+    max-width: 400px; /* Limit max width */
+    height: auto; /* Maintain aspect ratio */
     background: linear-gradient(greenyellow, rgb(187, 190, 10)); 
     border: 2px dashed white;
-    margin-top: 3rem;
+    margin-top: 1rem;
 }
 
 button {
@@ -51,6 +55,33 @@ button:hover{
 
 }
 
+.controls {
+    display: flex; /* Use flexbox to align buttons in a row */
+    justify-content: center; /* Center align buttons */
+    margin-top: 20px;
+}
+
+.controls button {
+    padding: 10px;
+    font-size: 1.5rem;
+    background: rgb(133, 216, 8);
+    color: #ffff;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 5px; /* Space between buttons */
+    transition: 0.3s all ease-in-out;
+}
+
+.controls button:hover {
+    background:rgb(46, 206, 218);
+    transform: scale(1.1);
+}
+
+
+
 body{
     animation: transitionIn 1s;
 }
@@ -71,20 +102,20 @@ body{
 
 
 
-@media(max-width:430px){
-    canvas{
-        width: 350px;
+@media(max-width:430px) {
+    canvas {
+        width: 100%; /* Adjust width for small devices */
     }
 }
 
-@media(max-width:370px){
-    canvas{
-        width: 300px;
+@media(max-width:370px) {
+    canvas {
+        width: 100%; /* Further adjust if necessary */
     }
 }
 
-@media(max-width:330px){
-    canvas{
-        width: 270px;
+@media(max-width:330px) {
+    canvas {
+        width: 100%; /* Ensure full width on very small devices */
     }
 }
